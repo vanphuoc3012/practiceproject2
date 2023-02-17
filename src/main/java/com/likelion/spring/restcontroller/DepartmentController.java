@@ -1,6 +1,7 @@
 package com.likelion.spring.restcontroller;
 
 import com.likelion.spring.dto.DepartmentDTO;
+import com.likelion.spring.dto.ErrorResponse;
 import com.likelion.spring.repository.DepartmentRepository;
 import com.likelion.spring.service.DepartmentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class DepartmentController {
     @PostMapping
     public ResponseEntity createNewDepartment(@RequestBody @Valid DepartmentDTO departmentDTO,
                                               BindingResult bindingResult) {
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().body(bindingResult.getFieldErrors().stream()
                     .map(f -> f.getDefaultMessage())
                     .collect(Collectors.toList()));
